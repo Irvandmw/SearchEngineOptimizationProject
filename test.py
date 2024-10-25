@@ -89,9 +89,7 @@ def search_books(books, search_term):
         
         # Count occurrences of each word in the search words
         for word in corrected_search_term:
-            print (word)
             occurrence_count += count_occurrences(text, word)
-            print(occurrence_count)
         
         occurrences[title] = occurrence_count
     
