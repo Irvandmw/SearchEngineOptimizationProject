@@ -73,14 +73,13 @@ def correct_search_term(search_term):
 # Updated search_books function to include spelling correction
 def search_books(books, search_term):
     # Correct the search term for known character names
-    corrected_search_term = correct_search_term(search_words)
+    corrected_search_term = correct_search_term(search_term)
     
     # Preprocess the corrected search term to remove stop words
     processed_search_term = remove_stop_words(corrected_search_term)
     
     # Split the processed search term into individual words
     search_words = processed_search_term.split()
-    
     
     occurrences = {}
     
