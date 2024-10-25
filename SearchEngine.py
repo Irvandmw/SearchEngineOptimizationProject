@@ -42,28 +42,25 @@ stop_words = set([
     'will', 'just', 'don', 'should', 'now'
 ])
 
-# Preprocess text to handle punctuation and possessives
 def preprocess_text(text):
     text = text.lower()
-    # Remove punctuation by keeping only word characters and spaces between them
     words = re.findall(r'\b\w+\b', text)
-    # Filter out stop words
+    # Filter konjungsi
     filtered_words = [word for word in words if word not in stop_words]
     return ' '.join(filtered_words)
 
-# # Function to count occurrences of a single word in text
+# Fungsi ngitung kata yang sama per-kata saja
 def count_single_word(text, word):
     word = word.lower()
     return len(re.findall(r'\b' + re.escape(word) + r'\b', text))
 
-# Boolean retrieval function
 def boolean_retrieval(books, query):
     results = {}
     query = query.lower()
     tokens = re.findall(r'\b\w+\b', query)
     
     for title, text in books.items():
-        matches = True
+        matches = True 
         for token in tokens:
             if token.startswith("not "):
                 search_term = token[4:]
@@ -83,7 +80,7 @@ def boolean_retrieval(books, query):
     
     return results
 
-# Function to remove stop words from text
+# Fungsi hapus konjungsi
 def remove_stop_words(text):
     words = text.split()  # Split text into words
     filtered_words = [word for word in words if word not in stop_words]  # Filter out stop words
@@ -99,57 +96,54 @@ def preprocess_text(text):
     # Remove stop words
     return remove_stop_words(cleaned_text)
 
-# Preprocess each book
 processed_books = {title: preprocess_text(content) for title, content in books.items()}
 
-# Preprocess each book
-processed_books = {title: preprocess_text(content) for title, content in books.items()}
-
-# Function to count occurrences of a multi-word search term
+# Fungsi untuk menghitung total kata yang sama
 def count_occurrences(text, search_term):
-    # Count the number of times the search term appears in the text
     return text.lower().count(search_term.lower())
 
 character_corrections = {
-    "harry" : ["hary"],
-    "potter": ["poter", "pottr", "poterr"]
+    "harry": ["hary", "hari"],
+    "potter": ["poter", "pottr", "poterr"],
+    "hermione": ["hermione", "hermion"],
+    "ron": ["ronn", "ronny"],
+    "dumbledore": ["dumbldore", "dumbeldore"],
+    "snape": ["sneap", "snap"],
+    "voldemort": ["voldemort", "voldemortt", "voldermort"],
+    "draco": ["drako", "draco"],
+    "hagrid": ["haggrid", "hagridd"],
+    "ginny": ["ginny", "ginni"],
+    "luna": ["luna", "loona"],
 }
 
 def correct_search_term(search_term):
-    # Normalize the search term to lowercase
-    normalized_term = search_term.lower()
-    
-    # Check if the search term matches any of the known misspellings
-    for correct_term, misspellings in character_corrections.items():
-        if normalized_term in misspellings:
-            return correct_term  # Return the correct term if a misspelling is found
-    # If no match, return the original term
-    return normalized_term
+    words = search_term.lower().split()
+    corrected_words = []
 
-# Updated search_books function to include spelling correction
+    for word in words:
+        corrected_word = word 
+        for correct_term, misspellings in character_corrections.items():
+            if word in misspellings:
+                corrected_word = correct_term  
+                break
+        corrected_words.append(corrected_word)
+    
+    # Join digunakan untuk menyatukan lagi kata
+    return ' '.join(corrected_words)
+
 def search_books(books, search_term):
-    # Preprocess the corrected search term to remove stop words
     processed_search_term = remove_stop_words(search_term.lower())
-    
-    # Split the processed search term into individual words
     search_words = processed_search_term.split()
-    
-    # Correct the search term for known character names
     corrected_search_term = [correct_search_term(term) for term in search_words]
 
     occurrences = {}
     
     for title, text in books.items():
-        # Initialize count for each book
         occurrence_count = 0
-        
-        # Count occurrences of each word in the search words
         for word in corrected_search_term:
             occurrence_count += count_occurrences(text, word)
-        
         occurrences[title] = occurrence_count
-    
-    # Sort books by occurrence count in descending order
+
     ranked_books = sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
     
     return ranked_books    
@@ -162,22 +156,36 @@ def index():
         search_term = request.form['search_term']
         ranked_books_tf = search_books(processed_books, search_term)
         boolean_results = boolean_retrieval(processed_books, search_term)
-        
-        if isinstance(boolean_results, str):
+        corrected_search_term = correct_search_term(search_term)
+        print("Hello world")
+        if corrected_search_term!=search_term:
+            if isinstance(boolean_results, str):
+                return render_template('index.html', 
+                                    search_term=search_term, 
+                                    ranked_books_tf=ranked_books_tf,
+                                    boolean_message=boolean_results,
+                                    corrected_search_term=corrected_search_term)
+            
             return render_template('index.html', 
-                                   search_term=search_term, 
-                                   ranked_books_tf=ranked_books_tf,
-                                   boolean_message=boolean_results)
-        
-        return render_template('index.html', 
-                               search_term=search_term, 
-                               ranked_books_tf=ranked_books_tf,
-                               boolean_results=boolean_results)
+                                search_term=search_term, 
+                                ranked_books_tf=ranked_books_tf,
+                                boolean_results=boolean_results,
+                                corrected_search_term=corrected_search_term)
+        else:
+            if isinstance(boolean_results, str):
+                return render_template('index.html',
+                                    search_term=search_term, 
+                                    ranked_books_tf=ranked_books_tf,
+                                    boolean_message=boolean_results)
+            
+            return render_template('index.html', 
+                                search_term=search_term, 
+                                ranked_books_tf=ranked_books_tf,
+                                boolean_results=boolean_results)
     return render_template('index.html')
 
 @app.route('/static/data/<title>')
 def show_book(title):
-    # Find the correct book content
     book_text = books.get(title)
     if book_text:
         return render_template('readingMode.html', title=title, content=book_text)

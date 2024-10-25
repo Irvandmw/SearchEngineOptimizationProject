@@ -10,14 +10,35 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('/static/assets/HarryPotter9x16.png');
+            background-image: url('/static/assets/hogwarts-harry-3840x2160-13694.jpg');
+            background-position: center;
             background-size: cover;      
             background-repeat: no-repeat; 
-            margin: 20px;
+            background-attachment: fixed;
             background-color: #f4f4f4;
         }
+        ::-webkit-scrollbar {
+            width: 8px; 
+            height: 8px; 
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #dcdcdc;
+            border-radius: 10px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #242424; 
+            border-radius: 10px;
+        }
+
         h1 {
-            color: #2c3e50;
+            color: rgb(255, 255, 255);
+            background-color: #333;
+            border-radius: 10px;
+            border: 10px solid #333;
+            text-align: center;
+            margin : auto;
         }
         pre {
             font-family: "Baskervville", serif;
@@ -38,7 +59,6 @@
         a:hover {
             color: #2980b9;
         }
-
         button {
             padding: 10px 20px;
             background-color: #3498db;
@@ -51,13 +71,41 @@
         button:hover {
             background-color: #2980b9;
         }
+        .toggle-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #e74c3c; 
+        }
     </style>
 </head>
 <body>
     <a href="/">
         <button type="button"> Back </button>
     </a>
-    <h1>{{ title }}</h1>
-    <pre>{{ content }}</pre>
+    <button class="toggle-button" onclick="togglePre()">Toggle Pre</button>
+    <h1 id="pageTitle">{{ title }}</h1>
+    <pre id="content">{{ content }}</pre>
+
+    <script>
+        function togglePre() {
+            const preElement = document.getElementById('content');
+            const titleElement = document.getElementById('pageTitle');
+  
+                if (preElement.style.display === "none") {
+                    preElement.style.display = "block"; 
+                } else {
+                    preElement.style.display = "none"; 
+                }
+                
+                if (titleElement.style.display === "none") {
+                    titleElement.style.display = "block"; 
+                } else {
+                    titleElement.style.display = "none"; 
+                }
+        }
+    </script>
 </body>
 </html>
+            
+       
