@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('../assets/Untitled-2.png');
+    background-size: cover;        
+    background-repeat: no-repeat;   
+    color: #ffffff;                 
+}
+
+h1 {
+    color: #ffffff;
+}
+
+form {
+    margin: 20px auto;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 300px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4b2c20;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #7a4f3b;
+}
+
+h2, p {
+    color: #333;
+}
