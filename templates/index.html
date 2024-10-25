@@ -7,8 +7,9 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            background-image: url('/static/assets/HarryPotter9x16.png');
+            background-size: cover;      
+            background-repeat: no-repeat; 
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,8 +19,18 @@
             min-height: 100vh;
             padding-top: 20px;
         }
+        .header {
+            display: flex;
+            align-items: center;
+        }
         h1 {
-            color: #2c3e50;
+            color: #03498e;
+        }
+        h2 {
+            color: rgb(255, 255, 255);
+            background-color: #333;
+            border-radius: 10px;
+            border: 10px solid #333;
         }
         form {
             margin-bottom: 20px;
@@ -44,9 +55,6 @@
         button:hover {
             background-color: #2980b9;
         }
-        h2 {
-            color: #2c3e50;
-        }
         ul {
             list-style-type: none;
             padding: 0;
@@ -63,10 +71,20 @@
             color: red;
             font-weight: bold;
         }
+        .logo{
+            clip-path: inset(30% 0 30% 0);
+            margin-right: 10px; 
+            height: 310px;
+            margin-bottom: -100px;
+            margin-top: -105px;
+        }
     </style>
 </head>
 <body>
-    <h1>Book Search Engine</h1>
+    <div class="header">
+        <img class = "logo" src="../static/assets/HarryPotterLogo.png" alt="Logo" />
+        <h1>Book Search Engine</h1>
+    </div>
     <form method="POST">
         <input type="text" name="search_term" placeholder="Enter search term..." required>
         <button type="submit">Search</button>
@@ -76,7 +94,9 @@
         <h2>TF Ranking of books based on occurrences of "{{ search_term }}":</h2>
         <ul>
         {% for title, count in ranked_books_tf %}
-            <li>{{ title }}: {{ count }} occurrences</li>
+            <li>
+                <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>: {{ count }} occurrences
+            </li>
         {% endfor %}
         </ul>
     {% endif %}
@@ -85,7 +105,9 @@
         <h2>Boolean Retrieval Results:</h2>
         <ul>
         {% for title in boolean_results %}
-            <li>{{ title }}: matches the query</li>
+            <li>
+                <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>: matches the query
+            </li>
         {% endfor %}
         </ul>
     {% else %}

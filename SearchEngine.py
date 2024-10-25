@@ -6,7 +6,7 @@ import webbrowser
 app = Flask(__name__)
 
 # Load Data
-data_dir = 'data'
+data_dir = 'static/data'
 books = {}
 
 for filename in os.listdir(data_dir):
@@ -156,7 +156,6 @@ def search_books(books, search_term):
 
 # FLASK
 # http://127.0.0.1:5000/
-# Go to the above URL to run the search engine in your browser
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -176,9 +175,19 @@ def index():
                                boolean_results=boolean_results)
     return render_template('index.html')
 
+@app.route('/static/data/<title>')
+def show_book(title):
+    # Find the correct book content
+    book_text = books.get(title)
+    if book_text:
+        return render_template('readingMode.html', title=title, content=book_text)
+    else:
+        return "Book not found", 404
+
 def open_browser():
     webbrowser.open_new('http://127.0.0.1:5000/')
 
 if __name__ == '__main__':
-    open_browser()
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        open_browser()
     app.run(debug=True)
