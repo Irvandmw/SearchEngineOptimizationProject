@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Harry Potter Search Engine</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>Harry Potter Series Search Engine</h1>
+    <form action="/" method="POST">
+        <input type="text" name="keyword" placeholder="Enter keyword, e.g., 'Voldemort'">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if result %}
+    <h2>Results for "{{ result.keyword }}":</h2>
+    <p><strong>Occurrences:</strong> {{ result.count }}</p>
+    <p><strong>Bio:</strong> {{ result.bio }}</p>
+    {% endif %}
+</body>
+</html>
