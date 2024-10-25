@@ -42,41 +42,19 @@ stop_words = set([
     'will', 'just', 'don', 'should', 'now'
 ])
 
-# # Preprocess text to handle punctuation and possessives
-# def preprocess_text(text):
-#     text = text.lower()
-#     # Remove punctuation by keeping only word characters and spaces between them
-#     words = re.findall(r'\b\w+\b', text)
-#     # Filter out stop words
-#     filtered_words = [word for word in words if word not in stop_words]
-#     return ' '.join(filtered_words)
-
-# # Preprocess each book
-# processed_books = {title: preprocess_text(content) for title, content in books.items()}
+# Preprocess text to handle punctuation and possessives
+def preprocess_text(text):
+    text = text.lower()
+    # Remove punctuation by keeping only word characters and spaces between them
+    words = re.findall(r'\b\w+\b', text)
+    # Filter out stop words
+    filtered_words = [word for word in words if word not in stop_words]
+    return ' '.join(filtered_words)
 
 # # Function to count occurrences of a single word in text
 def count_single_word(text, word):
     word = word.lower()
     return len(re.findall(r'\b' + re.escape(word) + r'\b', text))
-
-# # Function to count total occurrences of all words in the search term
-# def count_occurrences(text, search_term):
-#     search_words = search_term.lower().split()  # Split search term into individual words
-#     total_count = sum(count_single_word(text, word) for word in search_words)  # Sum the counts of all words
-#     return total_count
-
-# # Function to search and rank books based on total occurrences of all words in the search term
-# def search_books_tf(books, search_term):
-#     occurrences = {}
-    
-#     for title, text in books.items():
-#         occurrence_count = count_occurrences(text, search_term)
-#         occurrences[title] = occurrence_count
-    
-#     # Sort books by occurrence count in descending order
-#     ranked_books = sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
-    
-#     return ranked_books
 
 # Boolean retrieval function
 def boolean_retrieval(books, query):
@@ -201,7 +179,7 @@ for title in boolean_results:
 def index():
     if request.method == 'POST':
         search_term = request.form['search_term']
-        ranked_books_tf = search_books_tf(processed_books, search_term)
+        ranked_books_tf = search_books(processed_books, search_term)
         boolean_results = boolean_retrieval(processed_books, search_term)
         
         if isinstance(boolean_results, str):
