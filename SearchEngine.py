@@ -152,25 +152,7 @@ def search_books(books, search_term):
     # Sort books by occurrence count in descending order
     ranked_books = sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
     
-    return ranked_books
-
-# Example search for 'harry potter'
-search_term = "hary and poter"
-ranked_books = search_books(processed_books, search_term)
-
-boolean_search_term = "harry potter"
-boolean_results = boolean_retrieval(processed_books, boolean_search_term)
-
-# Displaying the results for TF
-print("Ranking of books based on occurrences of the search term: " + search_term)
-for title, count in ranked_books:
-    print(f"{title}: {count} occurrences")
-
-# Displaying the results for Boolean retrieval
-print("\nBoolean Retrieval Results:")
-for title in boolean_results:
-    print(f"{title}: matches the query")
-    
+    return ranked_books    
 
 # FLASK
 # http://127.0.0.1:5000/
