@@ -1,5 +1,9 @@
+from flask import Flask, render_template, request
 import os
 import re
+import webbrowser
+
+app = Flask(__name__)
 
 # Load Data
 data_dir = 'data'
@@ -12,18 +16,24 @@ for filename in os.listdir(data_dir):
 
 # Define a set of stop words
 stop_words = set([
-    'the', 'in', 'of', 'and', 'to', 'a', 'is', 'it', 'that', 'on', 'for', 
-    'as', 'with', 'was', 'at', 'by', 'an', 'be', 'this', 'are', 'from', 
-    'but', 'not', 'or', 'he', 'she', 'they', 'his', 'her', 'its', 'if', 
-    'what', 'which', 'who', 'when', 'where', 'why', 'all', 'any', 'some'
+    'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours',
+    'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers', 'herself',
+    'it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which',
+    'who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be',
+    'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an',
+    'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by',
+    'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before',
+    'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over',
+    'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why',
+    'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such',
+    'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can',
+    'will', 'just', 'don', 'should', 'now'
 ])
 
 # Preprocess text to handle punctuation and possessives
 def preprocess_text(text):
     text = text.lower()
-    # Remove punctuation by keeping only word characters and spaces between them
     words = re.findall(r'\b\w+\b', text)
-    # Filter out stop words
     filtered_words = [word for word in words if word not in stop_words]
     return ' '.join(filtered_words)
 
@@ -32,49 +42,36 @@ processed_books = {title: preprocess_text(content) for title, content in books.i
 
 # Function to count occurrences of a single word in text
 def count_single_word(text, word):
-    word = word.lower()  # Ensure case-insensitive search
-    # Use word boundaries to match whole words only
+    word = word.lower()
     return len(re.findall(r'\b' + re.escape(word) + r'\b', text))
 
 # Function to count total occurrences of all words in the search term
 def count_occurrences(text, search_term):
-    search_words = search_term.lower().split()  # Split search term into individual words
-    total_count = sum(count_single_word(text, word) for word in search_words)  # Sum the counts of all words
+    search_words = search_term.lower().split()
+    total_count = sum(count_single_word(text, word) for word in search_words)
     return total_count
 
 # Function to search and rank books based on total occurrences of all words in the search term
 def search_books_tf(books, search_term):
-    occurrences = {}
-    
-    for title, text in books.items():
-        occurrence_count = count_occurrences(text, search_term)
-        occurrences[title] = occurrence_count
-    
-    # Sort books by occurrence count in descending order
+    occurrences = {title: count_occurrences(text, search_term) for title, text in books.items()}
     ranked_books = sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
-    
     return ranked_books
 
 # Boolean retrieval function
 def boolean_retrieval(books, query):
     results = {}
-    
-    # Normalize and split the query
     query = query.lower()
     tokens = re.findall(r'\b\w+\b', query)
     
-    # Initialize a list for matching titles
     for title, text in books.items():
         matches = True
         for token in tokens:
-            # Handle NOT operator
             if token.startswith("not "):
-                search_term = token[4:]  # Get the term after NOT
+                search_term = token[4:]
                 if count_single_word(text, search_term) > 0:
                     matches = False
                     break
             else:
-                # Normal AND behavior
                 if count_single_word(text, token) == 0:
                     matches = False
                     break
@@ -82,22 +79,36 @@ def boolean_retrieval(books, query):
         if matches:
             results[title] = matches
             
+    if not results:
+        return f'The search term "{query}" does not match any books.'
+    
     return results
 
-# Example searches
-tf_search_term = "harry potter"
-ranked_books_tf = search_books_tf(processed_books, tf_search_term)
+# FLASK
+# http://127.0.0.1:5000/
+# Go to the above URL to run the search engine in your browser
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        search_term = request.form['search_term']
+        ranked_books_tf = search_books_tf(processed_books, search_term)
+        boolean_results = boolean_retrieval(processed_books, search_term)
+        
+        if isinstance(boolean_results, str):
+            return render_template('index.html', 
+                                   search_term=search_term, 
+                                   ranked_books_tf=ranked_books_tf,
+                                   boolean_message=boolean_results)
+        
+        return render_template('index.html', 
+                               search_term=search_term, 
+                               ranked_books_tf=ranked_books_tf,
+                               boolean_results=boolean_results)
+    return render_template('index.html')
 
-boolean_search_term = "harry potter"
-boolean_results = boolean_retrieval(processed_books, boolean_search_term)
+def open_browser():
+    webbrowser.open_new('http://127.0.0.1:5000/')
 
-# Displaying the results for TF
-print("TF Ranking of books based on occurrences of the search term : " + tf_search_term)
-for title, count in ranked_books_tf:
-    print(f"{title}: {count} occurrences")
-
-# Displaying the results for Boolean retrieval
-print("\nBoolean Retrieval Results:")
-for title in boolean_results:
-    print(f"{title}: matches the query")
-    
+if __name__ == '__main__':
+    open_browser()
+    app.run(debug=True)
