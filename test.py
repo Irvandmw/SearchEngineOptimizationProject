@@ -52,10 +52,10 @@ processed_books = {title: preprocess_text(content) for title, content in books.i
 # Function to count occurrences of a multi-word search term
 def count_occurrences(text, search_term):
     # Count the number of times the search term appears in the text
-    return text.count(search_term.lower())
+    return text.lower().count(search_term.lower())
 
 character_corrections = {
-    "hary": "harry",
+    "harry" : ["hary"],
     "potter": ["poter", "pottr", "poterr"]
 }
 
@@ -72,15 +72,15 @@ def correct_search_term(search_term):
 
 # Updated search_books function to include spelling correction
 def search_books(books, search_term):
-    # Correct the search term for known character names
-    corrected_search_term = correct_search_term(search_term)
-    
     # Preprocess the corrected search term to remove stop words
-    processed_search_term = remove_stop_words(corrected_search_term)
+    processed_search_term = remove_stop_words(search_term.lower())
     
     # Split the processed search term into individual words
     search_words = processed_search_term.split()
     
+    # Correct the search term for known character names
+    corrected_search_term = [correct_search_term(term) for term in search_words]
+
     occurrences = {}
     
     for title, text in books.items():
@@ -88,8 +88,10 @@ def search_books(books, search_term):
         occurrence_count = 0
         
         # Count occurrences of each word in the search words
-        for word in search_words:
+        for word in corrected_search_term:
+            print (word)
             occurrence_count += count_occurrences(text, word)
+            print(occurrence_count)
         
         occurrences[title] = occurrence_count
     
@@ -99,7 +101,7 @@ def search_books(books, search_term):
     return ranked_books
 
 # Example search for 'harry potter'
-search_term = "harry poter"
+search_term = "hary and poter"
 ranked_books = search_books(processed_books, search_term)
 
 # Displaying the results
