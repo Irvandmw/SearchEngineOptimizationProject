@@ -1,11 +1,10 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-image: url('../assets/wallpapersden.com_harry-potter-minimal-cool-hd-art_2912x1632.jpg'); /* Path ke gambar background */
-    background-size: cover;         /* Memastikan gambar memenuhi seluruh background */
-    /* background-position: center;    Memusatkan gambar */
-    background-repeat: no-repeat;   /* Tidak mengulangi gambar */
-    color: #ffffff;                 /* Mengubah teks menjadi putih untuk kontras */
+    background-image: url('../assets/Untitled-2.png');
+    background-size: cover;        
+    background-repeat: no-repeat;   
+    color: #ffffff;                 
 }
 
 h1 {

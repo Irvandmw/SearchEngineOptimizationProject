@@ -11,11 +11,5 @@
         <input type="text" name="keyword" placeholder="Enter keyword, e.g., 'Voldemort'">
         <button type="submit">Search</button>
     </form>
-
-    {% if result %}
-    <h2>Results for "{{ result.keyword }}":</h2>
-    <p><strong>Occurrences:</strong> {{ result.count }}</p>
-    <p><strong>Bio:</strong> {{ result.bio }}</p>
-    {% endif %}
 </body>
 </html>
