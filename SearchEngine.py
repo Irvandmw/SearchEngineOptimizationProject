@@ -103,7 +103,7 @@ def count_occurrences(text, search_term):
     return text.lower().count(search_term.lower())
 
 character_corrections = {
-    "harry": ["hary", "hari"],
+    "harry": ["hary", "hari", "haru"],
     "potter": ["poter", "pottr", "poterr"],
     "hermione": ["hermione", "hermion"],
     "ron": ["ronn", "ronny"],

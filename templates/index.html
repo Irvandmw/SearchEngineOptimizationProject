@@ -1,135 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Search Engine</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-image: url('/static/assets/HarryPotter9x16.png');
-            background-size: cover;      
-            background-repeat: no-repeat; 
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            padding-top: 20px;
-        }
-        ::-webkit-scrollbar {
-            width: 8px; 
-            height: 8px; 
-        }
+      body {
+        font-family: "Roboto", sans-serif;
+        background-image: url("/static/assets/HarryPotter9x16.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        padding-top: 20px;
+        position: relative;
+      }
 
-        ::-webkit-scrollbar-thumb {
-            background-color: #212121;
-            border-radius: 10px; 
-        }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
 
-        ::-webkit-scrollbar-track {
-            background: #e25700; 
-            border-radius: 10px; 
-        }
-        .header {
-            display: flex;
-            align-items: center;
-        }
-        h1 {
-            color: #03498e;
-        }
-        h2 {
-            color: rgb(255, 255, 255);
-            background-color: #333;
-            border-radius: 10px;
-            border: 10px solid #333;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 300px;
-            margin-right: 10px;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background-color: white;
-            margin: 5px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 400px;
-        }
-        .message {
-            color: red;
-            font-weight: bold;
-        }
-        .logo{
-            clip-path: inset(30% 0 30% 0);
-            margin-right: 10px; 
-            height: 310px;
-            margin-bottom: -100px;
-            margin-top: -105px;
-        }
+      ::-webkit-scrollbar-thumb {
+        background-color: #212121;
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #e25700;
+        border-radius: 10px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+      }
+
+      h1 {
+        color: #03498e;
+      }
+
+      h2 {
+        color: rgb(255, 255, 255);
+        background-color: #333;
+        border-radius: 10px;
+        border: 10px solid #333;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 300px;
+        margin-right: 10px;
+        font-size: 16px;
+      }
+
+      input[type="text"]:hover,
+      select:hover,
+      textarea:hover {
+        transition: all 0.5s ease;
+        background-color: #eaeaea;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #3498db;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+        transition: all 0.3s ease;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        background-color: white;
+        margin: 5px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 400px;
+      }
+
+      .message {
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .logo {
+        clip-path: inset(30% 0 30% 0);
+        margin-right: 10px;
+        height: 310px;
+        margin-bottom: -100px;
+        margin-top: -105px;
+      }
+
+      .results-container {
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+        margin-top: 20px;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .tf-ranking,
+      .boolean-results {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      ul {
+        padding: 0;
+        list-style-type: none;
+        width: 100%;
+      }
+
+      li {
+        background-color: white;
+        margin: 5px 0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 95%;
+        text-align: left;
+      }
+
+      .tf-ranking h2,
+      .boolean-results h2 {
+        text-align: center;
+        background-color: #333;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <img class = "logo" src="../static/assets/HarryPotterLogo.png" alt="Logo" />
-        <h1>Book Search Engine</h1>
+      <img class="logo" src="../static/assets/HarryPotterLogo.png" alt="Logo" />
+      <h1>Book Search Engine</h1>
     </div>
     <form method="POST">
-        <input type="text" name="search_term" placeholder="Enter search term..." required>
-        <button type="submit">Search</button>
+      <input
+        type="text"
+        name="search_term"
+        placeholder="Enter search term..."
+        required
+      />
+      <button type="submit">Search</button>
     </form>
 
-    {% if ranked_books_tf %}
+    <div class="results-container">
+      {% if ranked_books_tf %}
+      <div class="tf-ranking">
         {% if corrected_search_term %}
-            <h2>Did you mean "{{ corrected_search_term }}" ?</h2> 
+        <h2>Did you mean "{{ corrected_search_term }}" ?</h2>
         {% endif %}
-        <h2>TF Ranking of books based on occurrences of "{{ search_term }}":</h2>
+        <h2>
+          Term Frequency-Inverse Document Frequency of "{{ search_term }}":
+        </h2>
         <ul>
-        {% for title, count in ranked_books_tf %}
-            <li>
-                <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>: {{ count }} occurrences
-            </li>
-        {% endfor %}
+          {% for title, count in ranked_books_tf %}
+          <li>
+            <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>: {{
+            count }} occurrences
+          </li>
+          {% endfor %}
         </ul>
-    {% endif %}
-    
+      </div>
+      {% endif %} {% if boolean_results %}
+      <div class="boolean-results">
+        <h2>Boolean Retrieval of "{{ search_term }}":</h2>
+        <ul>
+          {% for title in boolean_results %}
+          <li>
+            <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>:
+            matches the query
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
 
-    {% if boolean_results %}
-        <h2>Boolean Retrieval Results:</h2>
-        <ul>
-        {% for title in boolean_results %}
-            <li>
-                <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>: matches the query
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p class="message">There are no matches for the search term "{{ search_term }}".</p>
+    {% if search_term and not boolean_results %}
+    <div class="message">
+      There are no Boolean Retrieval matches for the search term "{{ search_term }}".
+    </div>
     {% endif %}
-</body>
+  </body>
 </html>
