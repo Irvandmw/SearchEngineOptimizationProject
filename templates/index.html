@@ -11,7 +11,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        overflow: hidden;
+        /* overflow: hidden; */
         margin: 0;
         padding: 0;
         display: flex;
@@ -172,6 +172,35 @@
         border-radius: 5px;
         padding: 10px;
       }
+
+      .character-display { 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        padding: 20px; 
+        background-color: #ffffff; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        border-radius: 8px; 
+      } 
+      
+      .character-image { 
+        width: 240px; 
+        height: 320px; 
+        object-fit: cover; 
+        border-radius: 20%; 
+        margin-bottom: 10px; 
+      } 
+
+      .character-name { 
+        font-size: 20px; 
+        color: #333333; 
+        text-align: center; 
+        background-color: #ffffff; 
+        border-radius: 10px; 
+        padding: 5px 10px; 
+        margin-top: -10px; 
+      }
+
     </style>
   </head>
   <body>
@@ -188,6 +217,12 @@
       />
       <button type="submit">Search</button>
     </form>
+
+    {% if character %}
+      <div class="character_display">
+        <img src="/static/assets/characters/{{ character.image }}" alt="Character Image" class="character-image"> <p class="character-name">{{character.name}}</p>
+      </div>
+    {% endif %}
 
     <div class="results-container">
       {% if ranked_books_tf %}

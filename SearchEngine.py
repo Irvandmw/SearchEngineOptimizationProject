@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request
+from difflib import get_close_matches
 import os
 import re
 import webbrowser
+import json
+
 
 app = Flask(__name__)
 
-# Load Data
+# Load Data Buku
 data_dir = 'static/data'
 books = {}
 
@@ -13,6 +16,11 @@ for filename in os.listdir(data_dir):
     if filename.endswith(".txt"):
         with open(os.path.join(data_dir, filename), 'r', encoding='utf-8') as file:
             books[filename] = file.read()
+
+# Load Data Karakter
+CHARACTER_FILE = "static/assets/characters/characters.json"
+with open(CHARACTER_FILE, "r", encoding="utf-8") as file:
+    characters = json.load(file)
 
 # List of common stop words
 stop_words = set([
@@ -140,31 +148,47 @@ def index():
         ranked_books_tf = search_books(processed_books, search_term)
         boolean_results = boolean_retrieval(processed_books, search_term)
         corrected_search_term = correct_search_term(search_term)
-        print("Hello world")
+        names = [char["name"] for char in characters]
+        closest_matches = get_close_matches(search_term, names, n=1, cutoff=0.3)
+        
         if corrected_search_term!=search_term:
             if isinstance(boolean_results, str):
+                if closest_matches:
+                    match = closest_matches[0]
+                    character = next(char for char in characters if char["name"] == match)
+                    return render_template('index.html', 
+                                        search_term=search_term, 
+                                        ranked_books_tf=ranked_books_tf,
+                                        boolean_message=boolean_results,
+                                        corrected_search_term=corrected_search_term,
+                                        character=character)
+            if closest_matches:
+                match = closest_matches[0]
+                character = next(char for char in characters if char["name"] == match)
                 return render_template('index.html', 
                                     search_term=search_term, 
                                     ranked_books_tf=ranked_books_tf,
-                                    boolean_message=boolean_results,
-                                    corrected_search_term=corrected_search_term)
-            
-            return render_template('index.html', 
-                                search_term=search_term, 
-                                ranked_books_tf=ranked_books_tf,
-                                boolean_results=boolean_results,
-                                corrected_search_term=corrected_search_term)
+                                    boolean_results=boolean_results,
+                                    corrected_search_term=corrected_search_term,
+                                    character=character)
         else:
             if isinstance(boolean_results, str):
-                return render_template('index.html',
+                if closest_matches:
+                    match = closest_matches[0]
+                    character = next(char for char in characters if char["name"] == match)
+                    return render_template('index.html',
+                                        search_term=search_term, 
+                                        ranked_books_tf=ranked_books_tf,
+                                        boolean_message=boolean_results,
+                                        character=character)
+            if closest_matches:
+                match = closest_matches[0]
+                character = next(char for char in characters if char["name"] == match)
+                return render_template('index.html', 
                                     search_term=search_term, 
                                     ranked_books_tf=ranked_books_tf,
-                                    boolean_message=boolean_results)
-            
-            return render_template('index.html', 
-                                search_term=search_term, 
-                                ranked_books_tf=ranked_books_tf,
-                                boolean_results=boolean_results)
+                                    boolean_results=boolean_results,
+                                    character=character)
     return render_template('index.html')
 
 @app.route('/static/data/<title>')
