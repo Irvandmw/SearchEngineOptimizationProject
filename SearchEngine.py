@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request
+import Levenshtein
 import os
 import re
 import webbrowser
+from flask import Flask, render_template, request
+from Levenshtein import distance
 
 app = Flask(__name__)
 
@@ -85,39 +87,82 @@ processed_books = {title: preprocess_text(content) for title, content in books.i
 def count_occurrences(text, search_term):
     return text.lower().count(search_term.lower())
 
-character_corrections = {
-    "harry": ["hary", "hari", "haru"],
-    "potter": ["poter", "pottr", "poterr"],
-    "hermione": ["hermione", "hermion"],
-    "ron": ["ronn", "ronny"],
-    "dumbledore": ["dumbldore", "dumbeldore"],
-    "snape": ["sneap", "snap"],
-    "voldemort": ["voldemort", "voldemortt", "voldermort"],
-    "draco": ["drako", "draco"],
-    "hagrid": ["haggrid", "hagridd"],
-    "ginny": ["ginny", "ginni"],
-    "luna": ["luna", "loona"],
+characters = {
+    "Harry Potter", "Hermione Granger", "Ron Weasley", 
+    "Albus Dumbledore", "Lord Voldemort", "Severus Snape", 
+    "Rubeus Hagrid", "Draco Malfoy", "Sirius Black", 
+    "Bellatrix Lestrange", "Neville Longbottom", "Luna Lovegood",
+    "Ginny Weasley", "Fred Weasley", "George Weasley",
+    "Molly Weasley", "Arthur Weasley", "Minerva McGonagall",
+    "Remus Lupin", "Nymphadora Tonks", "Dobby", "Kreacher",
+    "Cho Chang", "Cedric Diggory", "Lucius Malfoy", 
+    "Narcissa Malfoy", "Fleur Delacour", "Viktor Krum",
+    "Peter Pettigrew", "Gilderoy Lockhart"
 }
 
-def correct_search_term(search_term):
-    words = search_term.lower().split()
-    corrected_words = []
 
-    for word in words:
-        corrected_word = word 
-        for correct_term, misspellings in character_corrections.items():
-            if word in misspellings:
-                corrected_word = correct_term  
-                break
-        corrected_words.append(corrected_word)
+# def correct_search_term(search_term,characters):
+#     closest_match = None
+#     min_distance = float('inf')
+
+#     # Iterasi setiap nama karakter
+#     for character in characters:
+#         # Hitung jarak Levenshtein
+#         character = character.lower()
+#         dist = Levenshtein.distance(search_term.lower(), character.lower())
+#         if dist < min_distance: 
+#             min_distance = dist
+#             closest_match = character
+#             print(character)
+            
+#     return closest_match
     
-    # Join digunakan untuk menyatukan lagi kata
-    return ' '.join(corrected_words)
+#     # words = search_term.lower().split()
+#     # corrected_words = []
+
+#     # for word in words:
+#     #     corrected_word = word 
+#     #     for correct_term, misspellings in characters.items():
+#     #         if word in misspellings:
+#     #             corrected_word = correct_term  
+#     #             break
+#     #     corrected_words.append(corrected_word)
+    
+#     # # Join digunakan untuk menyatukan lagi kata
+#     # return ' '.join(corrected_words)
+
+def correct_search_term(search_term, characters):
+    closest_match = None
+    min_distance = float('inf')
+    
+
+    # Check for exact matches (case-insensitive)
+    for character in characters:
+        character = character.lower()
+        if search_term.lower() == character.lower():
+            return character  # Exact match found
+
+    # Check for partial matches
+    for character in characters:
+        character = character.lower()
+        if search_term.lower() in character.lower():
+            return character  # Partial match found
+
+    # Fallback to Levenshtein distance
+    for character in characters:
+        character = character.lower()
+        dist = Levenshtein.distance(search_term.lower(), character.lower())
+        if dist < min_distance: 
+            min_distance = dist
+            closest_match = character
+
+    return closest_match
+
 
 def search_books(books, search_term):
     processed_search_term = remove_stop_words(search_term.lower())
     search_words = processed_search_term.split()
-    corrected_search_term = [correct_search_term(term) for term in search_words]
+    corrected_search_term = [correct_search_term(term, characters) for term in search_words]
 
     occurrences = {}
     
@@ -137,9 +182,11 @@ def search_books(books, search_term):
 def index():
     if request.method == 'POST':
         search_term = request.form['search_term']
+        search_term = search_term.lower()
+        print(search_term)
         ranked_books_tf = search_books(processed_books, search_term)
         boolean_results = boolean_retrieval(processed_books, search_term)
-        corrected_search_term = correct_search_term(search_term)
+        corrected_search_term = correct_search_term(search_term, characters)
         print("Hello world")
         if corrected_search_term!=search_term:
             if isinstance(boolean_results, str):
