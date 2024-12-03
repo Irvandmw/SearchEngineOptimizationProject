@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../static/assets/icon.png" type="image/x-icon" />
     <title>Book Search Engine</title>
     <style>
       body {
-        font-family: "Roboto", sans-serif;
+        font-family: "Montserrat", sans-serif;
         background-image: url("/static/assets/HarryPotter9x16.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        /* overflow: hidden; */
         margin: 0;
         padding: 0;
         display: flex;
@@ -20,7 +20,50 @@
         justify-content: flex-start;
         min-height: 100vh;
         padding-top: 20px;
-        position: relative;
+        position: relative; 
+        overscroll-behavior: none;  
+      }
+
+      .search-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .search-container input[type="text"] {
+        font-family: "Montserrat", sans-serif;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px 0 0 4px;
+        width: 300px;
+        font-size: 16px;
+        margin-right: -1px;
+      }
+
+      .search-container input[type="text"]:focus {
+        outline: none;
+        border: 1px solid #3498db;
+      }
+
+      .search-container input[type="text"]:hover {
+        background-color: #e4e4e4;
+        transition: all 0.3s ease;
+      }
+
+      .search-container button {
+        font-family: "Montserrat", sans-serif;
+        padding: 10px 20px;
+        background-color: #3498db;
+        border: 1px solid #3498db;
+        border-radius: 0 4px 4px 0;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .search-container button:hover {
+        background-color: #2980b9;
+        transition: all 0.3s ease;
       }
 
       ::-webkit-scrollbar {
@@ -45,48 +88,6 @@
 
       h1 {
         color: #03498e;
-      }
-
-      h2 {
-        color: rgb(255, 255, 255);
-        background-color: #333;
-        border-radius: 10px;
-        border: 10px solid #333;
-      }
-
-      form {
-        margin-bottom: 20px;
-      }
-
-      input[type="text"] {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        width: 300px;
-        margin-right: 10px;
-        font-size: 16px;
-      }
-
-      input[type="text"]:hover,
-      select:hover,
-      textarea:hover {
-        transition: all 0.5s ease;
-        background-color: #eaeaea;
-      }
-
-      button {
-        padding: 10px 20px;
-        background-color: #3498db;
-        border: none;
-        border-radius: 4px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: #2980b9;
-        transition: all 0.3s ease;
       }
 
       ul {
@@ -128,6 +129,17 @@
         justify-content: space-around;
         width: 80%;
         margin-top: 20px;
+      }
+
+      .did-you-mean {
+        text-align: center;
+      }
+
+      .did-you-mean h2 {
+        color: white;
+        background-color: #333;
+        padding: 10px;
+        border-radius: 4px;
       }
 
       .container {
@@ -173,34 +185,33 @@
         padding: 10px;
       }
 
-      .character-display { 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        padding: 20px; 
-        background-color: #ffffff; 
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-        border-radius: 8px; 
-      } 
-      
-      .character-image { 
-        width: 240px; 
-        height: 320px; 
-        object-fit: cover; 
-        border-radius: 20%; 
-        margin-bottom: 10px; 
-      } 
-
-      .character-name { 
-        font-size: 20px; 
-        color: #333333; 
-        text-align: center; 
-        background-color: #ffffff; 
-        border-radius: 10px; 
-        padding: 5px 10px; 
-        margin-top: -10px; 
+      .character-display {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
       }
 
+      .character-image {
+        width: 240px;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      .character-name {
+        font-size: 20px;
+        color: #333333;
+        text-align: center;
+        background-color: #ffffff;
+        border-radius: 4px;
+        padding: 5px 10px;
+        margin-top: -10px;
+      }
     </style>
   </head>
   <body>
@@ -209,47 +220,59 @@
       <h1>Book Search Engine</h1>
     </div>
     <form method="POST">
-      <input
-        type="text"
-        name="search_term"
-        placeholder="Enter search term..."
-        required
-      />
-      <button type="submit">Search</button>
+      <div class="search-container">
+        <input
+          type="text"
+          name="search_term"
+          placeholder="Enter search term..."
+          required
+        />
+        <button type="submit">Search</button>
+      </div>
     </form>
 
+    {% if corrected_search_term and corrected_search_term != search_term %}
+    <div class="did-you-mean">
+      <h2>Did you mean "{{ corrected_search_term }}" ?</h2>
+    </div>
+    {% endif %}
+    
     {% if character %}
-      <div class="character_display">
-        <img src="/static/assets/characters/{{ character.image }}" alt="Character Image" class="character-image"> <p class="character-name">{{character.name}}</p>
-      </div>
+    <div class="character_display">
+      <img
+        src="/static/assets/characters/{{ character.image }}"
+        alt="Character Image"
+        class="character-image"
+      />
+      <p class="character-name"><b>{{ character.name }}</b></p>
+    </div>
     {% endif %}
 
     <div class="results-container">
       {% if ranked_books_tf %}
       <div class="tf-ranking">
-        {% if corrected_search_term %}
-        <h2>Did you mean "{{ corrected_search_term }}" ?</h2>
-        {% endif %}
         <h2>
           Term Frequency-Inverse Document Frequency of "{{ search_term }}":
         </h2>
         <ul>
           {% for title, count in ranked_books_tf %}
           <li>
-            <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>: {{
-            count }} occurrences
+            <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>:
+            <b>{{ count }} occurrences</b>
           </li>
           {% endfor %}
         </ul>
       </div>
-      {% endif %} {% if boolean_results %}
+      {% endif %}
+      
+      {% if boolean_results %}
       <div class="boolean-results">
         <h2>Boolean Retrieval of "{{ search_term }}":</h2>
         <ul>
           {% for title in boolean_results %}
           <li>
             <a href="/static/data/{{ title | urlencode}}">{{ title }}</a>:
-            matches the query
+            <b> matches the query </b>
           </li>
           {% endfor %}
         </ul>

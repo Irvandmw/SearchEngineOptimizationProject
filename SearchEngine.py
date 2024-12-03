@@ -42,7 +42,6 @@ stop_words = set([
 def preprocess_text(text):
     text = text.lower()
     words = re.findall(r'\b\w+\b', text)
-    # Filter konjungsi
     filtered_words = [word for word in words if word not in stop_words]
     return ' '.join(filtered_words)
 
