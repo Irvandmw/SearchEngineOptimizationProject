@@ -64,8 +64,8 @@ def boolean_retrieval(books, query):
         if matches:
             results[title] = matches
             
-    if not results:
-        return f'The search term "{query}" does not match any books.'
+    # if not results:
+    #     return f'The search term "{query}" does not match any books.'
     
     return results
 
