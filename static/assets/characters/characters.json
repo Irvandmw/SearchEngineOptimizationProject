@@ -2,5 +2,6 @@
     {"name": "Harry Potter", "image": "Harry Potter.jpg"},
     {"name": "Hermione Granger", "image": "Hermione Granger.jpg"},
     {"name": "Ron Weasley", "image": "Ron Weasley.jpg"},
-    {"name": "Albus Dumbledore", "image": "Albus Dumbledore.jpg"}
+    {"name": "Albus Dumbledore", "image": "Albus Dumbledore.jpg"},
+    {"name": "Dobby", "image": ""}
 ]

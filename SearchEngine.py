@@ -122,27 +122,44 @@ def correct_search_term(search_term, characters_levenshtein):
 
     return closest_match
 
+# def search_books(books, search_term):
+#     processed_search_term = remove_stop_words(search_term.lower())
+#     search_words = processed_search_term.split()
+#     corrected_search_term = [correct_search_term(term, characters_levenshtein) for term in search_words]
+
+#     occurrences = {}
+    
+#     for title, text in books.items():
+#         occurrence_count = 0
+#         for word in corrected_search_term:
+#             occurrence_count += count_occurrences(text, word)
+#         occurrences[title] = occurrence_count
+
+#     ranked_books = sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
+    
+#     return ranked_books   
+
+# new search books
 def search_books(books, search_term):
     processed_search_term = remove_stop_words(search_term.lower())
     search_words = processed_search_term.split()
-    corrected_search_term = [correct_search_term(term, characters_levenshtein) for term in search_words]
 
     occurrences = {}
     
     for title, text in books.items():
         occurrence_count = 0
-        for word in corrected_search_term:
+        for word in search_words:
             occurrence_count += count_occurrences(text, word)
         occurrences[title] = occurrence_count
 
     ranked_books = sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
     
-    return ranked_books    
+    return ranked_books 
 
 # FLASK
 # http://127.0.0.1:5000/
-@app.route('/', methods=['GET', 'POST'])
-def index():
+# @app.route('/', methods=['GET', 'POST'])
+# def index():
     if request.method == 'POST':
         search_term = request.form['search_term']
         search_term = search_term.lower()
@@ -192,6 +209,33 @@ def index():
                                     ranked_books_tf=ranked_books_tf,
                                     boolean_results=boolean_results,
                                     character=character)
+    return render_template('index.html')
+
+# new index
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        search_term = request.form['search_term']
+        search_term = search_term.lower()
+        ranked_books_tf = search_books(processed_books, search_term)
+        boolean_results = boolean_retrieval(processed_books, search_term)
+
+        # Check if the search term is a character
+        corrected_search_term = correct_search_term(search_term, characters_levenshtein)
+        closest_matches = get_close_matches(search_term, [char["name"] for char in characters], n=1, cutoff=0.3)
+
+        character = None
+        if closest_matches:
+            match = closest_matches[0]
+            character = next(char for char in characters if char["name"] == match)
+
+        return render_template('index.html', 
+                               search_term=search_term, 
+                               ranked_books_tf=ranked_books_tf,
+                               boolean_results=boolean_results,
+                               corrected_search_term=corrected_search_term,
+                               character=character)
+
     return render_template('index.html')
 
 @app.route('/static/data/<title>')
