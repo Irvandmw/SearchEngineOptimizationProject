@@ -87,7 +87,7 @@ def count_occurrences(text, search_term):
     return text.lower().count(search_term.lower())
 
 characters_levenshtein = {
-    "Harry Potter", "Hermione Granger", "Ron Weasley", 
+    "Harry","Potter", "Hermione Granger", "Ron Weasley", 
     "Albus Dumbledore", "Lord Voldemort", "Severus Snape", 
     "Rubeus Hagrid", "Draco Malfoy", "Sirius Black", 
     "Bellatrix Lestrange", "Neville Longbottom", "Luna Lovegood",
@@ -99,29 +99,50 @@ characters_levenshtein = {
     "Peter Pettigrew", "Gilderoy Lockhart"
 }
 
-def correct_search_term(search_term, characters_levenshtein):
+def correct_search_term(search_term, characters_levenshtein, threshold=1):
     closest_match = None
     min_distance = float('inf')
-
+    
+    search_term = search_term.lower()
+    
+    # Check for exact matches first
     for character in characters_levenshtein:
-        character = character.lower()
-        if search_term.lower() == character.lower():
+        character_lower = character.lower()
+        if search_term == character_lower:
+            print(f"Exact match found: {character_lower}")  # Debug output
             return character  # Exact match found
-
+    
+    # Check for partial matches (substring match) second
     for character in characters_levenshtein:
-        character = character.lower()
-        if search_term.lower() in character.lower():
+        character_lower = character.lower()
+        if search_term in character_lower:
+            print(f"Partial match found: {character_lower}")  # Debug output
             return character  # Partial match found
-
+    
+    # Check for closest match based on Levenshtein distance
     for character in characters_levenshtein:
-        character = character.lower()
-        dist = Levenshtein.distance(search_term.lower(), character.lower())
-        if dist < min_distance: 
+        character_lower = character.lower()
+        dist = Levenshtein.distance(search_term, character_lower)
+        print(f"Comparing '{search_term}' to '{character_lower}', distance: {dist}")  # Debug output
+        
+        # Update closest match if the distance is smaller
+        if dist < min_distance:
             min_distance = dist
             closest_match = character
+            print(f"New closest match: {closest_match}, distance: {min_distance}")  # Debug output
+    
+    # Check if the closest match meets the threshold
+    threshold_value = threshold * len(search_term)
+    print(f"Threshold value: {threshold_value}, Minimum distance: {min_distance}")  # Debug output
+    
+    if min_distance <= threshold_value:
+        print(f"Returning closest match: {closest_match} (distance: {min_distance})")  # Debug output
+        return closest_match
+    else:
+        print(f"No match found within threshold. Returning None.")  # Debug output
+        return None  # Or return a default string such as "No close match found"
 
-    return closest_match
-
+    
 # def search_books(books, search_term):
 #     processed_search_term = remove_stop_words(search_term.lower())
 #     search_words = processed_search_term.split()
@@ -221,19 +242,21 @@ def index():
         boolean_results = boolean_retrieval(processed_books, search_term)
 
         # Check if the search term is a character
-        corrected_search_term = correct_search_term(search_term, characters_levenshtein)
+        corrected_search_terms = correct_search_term(search_term, characters_levenshtein)
         closest_matches = get_close_matches(search_term, [char["name"] for char in characters], n=1, cutoff=0.3)
 
         character = None
         if closest_matches:
             match = closest_matches[0]
             character = next(char for char in characters if char["name"] == match)
+        else :
+            return None
 
         return render_template('index.html', 
                                search_term=search_term, 
                                ranked_books_tf=ranked_books_tf,
                                boolean_results=boolean_results,
-                               corrected_search_term=corrected_search_term,
+                               corrected_search_terms=corrected_search_terms,
                                character=character)
 
     return render_template('index.html')
