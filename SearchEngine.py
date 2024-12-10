@@ -236,10 +236,10 @@ def index():
         ranked_books_tf = search_books(processed_books, search_term)
         boolean_results = boolean_retrieval(processed_books, search_term)
 
-        # Check if the search term is a character
         corrected_search_terms = correct_search_term(search_term, characters_levenshtein)
         print("cst : ",  corrected_search_terms)
         closest_matches = get_close_matches(search_term, [char["name"] for char in characters], n=1, cutoff=0.1)
+        corrected_term = closest_matches[0] if closest_matches else ''
         print("close",  closest_matches)
         character = None
         if closest_matches:
@@ -253,7 +253,7 @@ def index():
                                search_term=search_term, 
                                ranked_books_tf=ranked_books_tf,
                                boolean_results=boolean_results,
-                               match=corrected_search_terms,
+                               match=corrected_term,
                                character=character
                                )
 

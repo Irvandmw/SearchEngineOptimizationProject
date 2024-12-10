@@ -129,6 +129,7 @@
         justify-content: space-around;
         width: 80%;
         margin-top: 20px;
+        margin-bottom: 80px;
       }
 
       .did-you-mean {
@@ -231,9 +232,9 @@
       </div>
     </form>
 
-    {% if  search_term != char_name %}
+    {% if  search_term != match %}
     <div class="did-you-mean">
-      <h2>Did you mean "{{ char_name }}" ?</h2>
+      <h2>Did you mean "{{ match }}" ?</h2>
     </div>
     {% endif %}
 
