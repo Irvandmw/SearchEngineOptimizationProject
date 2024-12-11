@@ -231,26 +231,30 @@ def search_books(books, search_term):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        search_term = request.form['search_term']
+        search_term = request.form['search_term'] 
         search_term = search_term.lower()
         ranked_books_tf = search_books(processed_books, search_term)
         boolean_results = boolean_retrieval(processed_books, search_term)
 
-        corrected_search_terms = correct_search_term(search_term, characters_levenshtein)
-        print("cst : ",  corrected_search_terms)
-        closest_matches = get_close_matches(search_term, [char["name"] for char in characters], n=1, cutoff=0.1)
+        closest_matches = get_close_matches(search_term, [char["name"] for char in characters], n=1, cutoff=0.5)
         corrected_term = closest_matches[0] if closest_matches else ''
-        print("close",  closest_matches)
+        print("corrected_term:", corrected_term)
+        lower_corrected_term = corrected_term.lower()
+        print("lct:",lower_corrected_term)
+        lower_search_term = search_term.lower()
+        print("lst:", lower_search_term)
+
         character = None
         if closest_matches:
             match = closest_matches[0]
             character = next(char for char in characters if char["name"] == match)
             print(character)
-        else :
-            return None
         
         return render_template('index.html', 
-                               search_term=search_term, 
+                               closest_matches=closest_matches, 
+                               search_term=search_term,
+                               lower_search_term=lower_search_term, 
+                               lower_corrected_term=lower_corrected_term,
                                ranked_books_tf=ranked_books_tf,
                                boolean_results=boolean_results,
                                match=corrected_term,

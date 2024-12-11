@@ -134,13 +134,14 @@
 
       .did-you-mean {
         text-align: center;
-      }
-
-      .did-you-mean h2 {
         color: white;
         background-color: #333;
         padding: 10px;
         border-radius: 4px;
+      }
+
+      .did-you-mean h2 {
+        
       }
 
       .container {
@@ -220,11 +221,12 @@
       <img class="logo" src="../static/assets/HarryPotterLogo.png" alt="Logo" />
       <h1>Book Search Engine</h1>
     </div>
-    <form method="POST">
+    <form id="resubmit-form" method="POST" >
       <div class="search-container">
         <input
+          name="search_term" 
+          id="resubmit-input"
           type="text"
-          name="search_term"
           placeholder="Enter search term..."
           required
         />
@@ -232,10 +234,11 @@
       </div>
     </form>
 
-    {% if  search_term != match %}
-    <div class="did-you-mean">
-      <h2>Did you mean "{{ match }}" ?</h2>
-    </div>
+    {% if lower_corrected_term != lower_search_term %}
+      <h2 class="did-you-mean">
+        Did you mean 
+        <a href="#" class = "did-you-mean" id="suggested-match" onclick="resubmitSearch('{{ match }}')"> {{ match }}</a> ?
+      </h2>
     {% endif %}
 
     {% if character %}
@@ -287,4 +290,22 @@
 </div>
 {% endif %}
   </body>
+
+<script>
+    const suggestedMatch = document.getElementById("suggested-match");
+
+    suggestedMatch.addEventListener("click", function (event) {
+        event.preventDefault(); 
+        const searchInput = document.querySelector("input[name='search_term']");
+        searchInput.value = this.innerText; // Set nilai input
+    });
+
+    function resubmitSearch(match) {
+        const resubmitInput = document.getElementById("resubmit-input");
+        resubmitInput.value = match;
+
+        const resubmitForm = document.getElementById("resubmit-form");
+        resubmitForm.submit();
+    }
+</script>
 </html>
