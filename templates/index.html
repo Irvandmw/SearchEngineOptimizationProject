@@ -26,13 +26,25 @@
 
       .search-container {
         display: flex;
+        position: relative;
         align-items: center;
         margin-bottom: 20px;
+        margin-top: 30px;
       }
+
+      .search-container .icon {
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none; 
+            width: 36px; 
+            height: 36px;        
+        }
 
       .search-container input[type="text"] {
         font-family: "Montserrat", sans-serif;
-        padding: 10px;
+        padding: 10px 10px 10px 40px; /* Tambahkan padding kiri untuk ikon */   
         border: 1px solid #ccc;
         border-radius: 4px 0 0 4px;
         width: 300px;
@@ -140,10 +152,6 @@
         border-radius: 4px;
       }
 
-      .did-you-mean h2 {
-        
-      }
-
       .container {
         display: flex;
         justify-content: center;
@@ -198,11 +206,18 @@
       }
 
       .character-image {
-        width: 240px;
-        height: 320px;
+        width: 290px;
+        height: 370px;
         object-fit: cover;
         border-radius: 4px;
         margin-bottom: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+      }
+
+      .character-image:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
+        transform: scale(1.1);
       }
 
       .character-name {
@@ -212,7 +227,7 @@
         background-color: #ffffff;
         border-radius: 4px;
         padding: 5px 10px;
-        margin-top: -10px;
+        margin-top: -0px;
       }
     </style>
   </head>
@@ -229,15 +244,16 @@
           type="text"
           placeholder="Enter search term..."
           required
-        />
+        >
+        <img src="../static/assets/HPIcon.png" alt="Search Icon" class="icon" width="16" height="16">
         <button type="submit">Search</button>
       </div>
     </form>
 
-    {% if lower_corrected_term != lower_search_term %}
+    {% if lower_corrected_term != lower_search_term and lower_corrected_term != '' %}
       <h2 class="did-you-mean">
         Did you mean 
-        <a href="#" class = "did-you-mean" id="suggested-match" onclick="resubmitSearch('{{ match }}')"> {{ match }}</a> ?
+        <a href="#" class = "did-you-mean" id="suggested-match" onclick="resubmitSearch('{{ match }}')">{{ match }}</a> ?
       </h2>
     {% endif %}
 
