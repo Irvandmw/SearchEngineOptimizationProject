@@ -59,9 +59,6 @@ def boolean_retrieval(books, query):
         if matches:
             results[title] = matches
             
-    # if not results:
-    #     return f'The search term "{query}" does not match any books.'
-    
     return results
 
 # Fungsi hapus konjungsi
@@ -99,61 +96,37 @@ def correct_search_term(search_term, characters_levenshtein, threshold=0.1):
     min_distance = float('inf')
     
     search_term = search_term.lower()
-    
-    # Check for exact matches first
+
     for character in characters_levenshtein:
         character_lower = character.lower()
         if search_term == character_lower:
-            print(f"Exact match found: {character_lower}")  # Debug output
-            return character  # Exact match found
-    
-    # Check for partial matches (substring match) second
+            print(f"Exact match found: {character_lower}")  
+            return character  
+
     for character in characters_levenshtein:
         character_lower = character.lower()
         if search_term in character_lower:
-            print(f"Partial match found: {character_lower}")  # Debug output
-            return character  # Partial match found
-    
-    # Check for closest match based on Levenshtein distance
+            print(f"Partial match found: {character_lower}")  
+            return character 
+
     for character in characters_levenshtein:
         character_lower = character.lower()
         dist = Levenshtein.distance(search_term, character_lower)
-        print(f"Comparing '{search_term}' to '{character_lower}', distance: {dist}")  # Debug output
-        
-        # Update closest match if the distance is smaller
+        print(f"Comparing '{search_term}' to '{character_lower}', distance: {dist}") 
+
         if dist < min_distance:
             min_distance = dist
             closest_match = character
-            print(f"New closest match: {closest_match}, distance: {min_distance}")  # Debug output
+            print(f"New closest match: {closest_match}, distance: {min_distance}")  
     
-    # Check if the closest match meets the threshold
     threshold_value = threshold * len(search_term)
-    print(f"Threshold value: {threshold_value}, Minimum distance: {min_distance}")  # Debug output
+    print(f"Threshold value: {threshold_value}, Minimum distance: {min_distance}")  
     
     if min_distance <= threshold_value:
-        print(f"Returning closest match: {closest_match} (distance: {min_distance})")  # Debug output
+        print(f"Returning closest match: {closest_match} (distance: {min_distance})")  
         return closest_match
     else:
-        print(f"No match found within threshold. Returning None.")  # Debug output
-        return None  # Or return a default string such as "No close match found"
-
-    
-# def search_books(books, search_term):
-#     processed_search_term = remove_stop_words(search_term.lower())
-#     search_words = processed_search_term.split()
-#     corrected_search_term = [correct_search_term(term, characters_levenshtein) for term in search_words]
-
-#     occurrences = {}
-    
-#     for title, text in books.items():
-#         occurrence_count = 0
-#         for word in corrected_search_term:
-#             occurrence_count += count_occurrences(text, word)
-#         occurrences[title] = occurrence_count
-
-#     ranked_books = sorted(occurrences.items(), key=lambda x: x[1], reverse=True)
-    
-#     return ranked_books   
+        print(f"No match found within threshold. Returning None.") 
 
 # new search books
 def search_books(books, search_term):
@@ -176,58 +149,6 @@ def search_books(books, search_term):
 # http://127.0.0.1:5000/
 # @app.route('/', methods=['GET', 'POST'])
 # def index():
-    if request.method == 'POST':
-        search_term = request.form['search_term']
-        search_term = search_term.lower()
-        print(search_term)
-        ranked_books_tf = search_books(processed_books, search_term)
-        boolean_results = boolean_retrieval(processed_books, search_term)
-        corrected_search_term = correct_search_term(search_term, characters_levenshtein)
-        names = [char["name"] for char in characters]
-        closest_matches = get_close_matches(search_term, names, n=1, cutoff=0.3)
-        print("Hello world")
-
-        if corrected_search_term!=search_term:
-            if isinstance(boolean_results, str):
-                if closest_matches:
-                    match = closest_matches[0]
-                    character = next(char for char in characters if char["name"] == match)
-                    return render_template('index.html', 
-                                        search_term=search_term, 
-                                        ranked_books_tf=ranked_books_tf,
-                                        boolean_message=boolean_results,
-                                        corrected_search_term=corrected_search_term,
-                                        character=character)
-            if closest_matches:
-                match = closest_matches[0]
-                character = next(char for char in characters if char["name"] == match)
-                return render_template('index.html', 
-                                    search_term=search_term, 
-                                    ranked_books_tf=ranked_books_tf,
-                                    boolean_results=boolean_results,
-                                    corrected_search_term=corrected_search_term,
-                                    character=character)
-        else:
-            if isinstance(boolean_results, str):
-                if closest_matches:
-                    match = closest_matches[0]
-                    character = next(char for char in characters if char["name"] == match)
-                    return render_template('index.html',
-                                        search_term=search_term, 
-                                        ranked_books_tf=ranked_books_tf,
-                                        boolean_message=boolean_results,
-                                        character=character)
-            if closest_matches:
-                match = closest_matches[0]
-                character = next(char for char in characters if char["name"] == match)
-                return render_template('index.html', 
-                                    search_term=search_term, 
-                                    ranked_books_tf=ranked_books_tf,
-                                    boolean_results=boolean_results,
-                                    character=character)
-    return render_template('index.html')
-
-# new index
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -236,7 +157,7 @@ def index():
         ranked_books_tf = search_books(processed_books, search_term)
         boolean_results = boolean_retrieval(processed_books, search_term)
 
-        closest_matches = get_close_matches(search_term, [char["name"] for char in characters], n=1, cutoff=0.5)
+        closest_matches = get_close_matches(search_term, [char["name"] for char in characters], n=1, cutoff=0.3)
         corrected_term = closest_matches[0] if closest_matches else ''
         print("corrected_term:", corrected_term)
         lower_corrected_term = corrected_term.lower()
