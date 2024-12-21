@@ -1,0 +1,3 @@
+Character Name = Pius Thicknesse
+Species = Human
+Gender = Male

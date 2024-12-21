@@ -1,0 +1,3 @@
+Character Name = Serpent of Slitherin
+Species = Basilisk
+Gender = Female

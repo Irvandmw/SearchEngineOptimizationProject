@@ -1,0 +1,3 @@
+Character Name = Bane
+Species = Centaur
+Gender = Male

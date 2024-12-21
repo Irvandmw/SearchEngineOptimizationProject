@@ -1,0 +1,4 @@
+Character Name = Stanley Shunpike
+Species = Human
+Gender = Male
+Actor = David Tennant

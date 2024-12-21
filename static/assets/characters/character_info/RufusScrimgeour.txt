@@ -1,0 +1,4 @@
+Character Name = Rufus Scrimgeour
+Species = Human
+Gender = Male
+Actor = Bill Nighy

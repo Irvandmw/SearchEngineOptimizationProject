@@ -1,0 +1,7 @@
+Character Name = Neville Longbottom
+Species = Human
+Gender = Male
+House = Gryffindor
+Wand (Wood) = Cherry
+Wand (Core) = Unicorn Hair
+Actor = Matthew Lewis

@@ -1,0 +1,7 @@
+Character Name = Bellatrix Lestrange
+Species = Human
+Gender = Female
+House = Slytherin
+Wand (Wood) = Walnut
+Wand (Core) = Dragon Heartstring
+Actor = Helena Bonham Carter

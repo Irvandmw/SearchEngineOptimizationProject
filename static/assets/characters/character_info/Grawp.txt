@@ -1,0 +1,3 @@
+Character Name = Grawp
+Species = Giant
+Gender = Male

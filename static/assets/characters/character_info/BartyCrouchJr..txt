@@ -1,0 +1,4 @@
+Character Name = Barty Crouch Jr.
+Species = Human
+Gender = Male
+Actor = Robert Pattinson

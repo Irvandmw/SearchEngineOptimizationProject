@@ -1,0 +1,5 @@
+Character Name = Helena Ravenclaw
+Species = Ghost
+Gender = Female
+House = Ravenclaw
+Actor = Kelly Macdonald

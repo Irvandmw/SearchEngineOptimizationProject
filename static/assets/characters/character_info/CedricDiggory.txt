@@ -1,0 +1,5 @@
+Character Name = Cedric Diggory
+Species = Human
+Gender = Male
+House = Hufflepuff
+Actor = Robert Pattinson

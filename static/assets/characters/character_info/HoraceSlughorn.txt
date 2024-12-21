@@ -1,0 +1,7 @@
+Character Name = Horace Slughorn
+Species = Human
+Gender = Male
+House = Slytherin
+Wand (Wood) = Cedar
+Wand (Core) = Dragon Heartstring
+Actor = Jim Broadbent

@@ -1,0 +1,4 @@
+Character Name = Leanne
+Species = Human
+Gender = Female
+House = Hufflepuff

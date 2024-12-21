@@ -1,0 +1,5 @@
+Character Name = Aberforth Dumbledore
+Species = Human
+Gender = Male
+Patronus = Goat
+Actor = Ciarán Hinds

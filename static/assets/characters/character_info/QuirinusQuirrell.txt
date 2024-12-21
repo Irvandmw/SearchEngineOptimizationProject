@@ -1,0 +1,7 @@
+Character Name = Quirinus Quirrell
+Species = Human
+Gender = Male
+House = Ravenclaw
+Wand (Wood) = Alder
+Wand (Core) = Unicorn Hair
+Actor = Ian Hart

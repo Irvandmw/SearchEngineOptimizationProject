@@ -1,0 +1,8 @@
+Character Name = Dolores Umbridge
+Species = Human
+Gender = Female
+House = Slytherin
+Patronus = Cat
+Wand (Wood) = Birch
+Wand (Core) = Dragon Heartstring
+Actor = Imelda Staunton

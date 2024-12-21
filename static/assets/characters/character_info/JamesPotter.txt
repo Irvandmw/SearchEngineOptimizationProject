@@ -1,0 +1,7 @@
+Character Name = James Potter
+Species = Human
+Gender = Male
+House = Gryffindor
+Patronus = Stag
+Wand (Wood) = Mahogany
+Actor = Adrian Rawlins

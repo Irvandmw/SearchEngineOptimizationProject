@@ -1,0 +1,4 @@
+Character Name = Arabella Figg
+Species = Human
+Gender = Female
+Actor = Kathryn Hunter

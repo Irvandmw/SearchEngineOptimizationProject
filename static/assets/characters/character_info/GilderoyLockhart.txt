@@ -1,0 +1,7 @@
+Character Name = Gilderoy Lockhart
+Species = Human
+Gender = Male
+House = Ravenclaw
+Wand (Wood) = Cherry
+Wand (Core) = Dragon Heartstring
+Actor = Kenneth Branagh

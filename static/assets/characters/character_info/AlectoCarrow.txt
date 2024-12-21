@@ -1,0 +1,4 @@
+Character Name = Alecto Carrow
+Species = Human
+Gender = Female
+House = Slytherin

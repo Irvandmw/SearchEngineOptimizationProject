@@ -1,0 +1,6 @@
+Character Name = Seamus Finnigan
+Species = Human
+Gender = Male
+House = Gryffindor
+Patronus = Fox
+Actor = Devon Murray

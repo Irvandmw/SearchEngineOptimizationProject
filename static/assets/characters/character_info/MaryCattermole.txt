@@ -1,0 +1,4 @@
+Character Name = Mary Cattermole
+Species = Human
+Gender = Female
+Actor = Katie Leung

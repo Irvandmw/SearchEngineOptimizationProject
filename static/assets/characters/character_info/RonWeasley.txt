@@ -1,0 +1,6 @@
+Character Name = Ron Weasley
+Species = Human
+Gender = Male
+House = Gryffindor
+Patronus = Jack Russell Terrier
+Actor = Rupert Grint

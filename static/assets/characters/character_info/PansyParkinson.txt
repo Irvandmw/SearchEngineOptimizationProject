@@ -1,0 +1,4 @@
+Character Name = Pansy Parkinson
+Species = Human
+Gender = Female
+House = Slytherin

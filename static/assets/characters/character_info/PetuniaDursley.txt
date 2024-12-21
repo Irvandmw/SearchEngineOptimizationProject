@@ -1,0 +1,4 @@
+Character Name = Petunia Dursley
+Species = Human
+Gender = Female
+Actor = Fiona Shaw

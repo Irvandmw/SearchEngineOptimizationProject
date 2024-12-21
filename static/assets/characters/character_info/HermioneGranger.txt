@@ -1,0 +1,8 @@
+Character Name = Hermione Granger
+Species = Human
+Gender = Female
+House = Gryffindor
+Patronus = Otter
+Wand (Wood) = Vine
+Wand (Core) = Dragon Heartstring
+Actor = Emma Watson

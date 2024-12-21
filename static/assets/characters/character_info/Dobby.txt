@@ -1,0 +1,4 @@
+Character Name = Dobby
+Species = House Elf
+Gender = Male
+Actor = Toby Jones (voice and motion capture)

@@ -1,0 +1,4 @@
+Character Name = Barty Crouch Sr.
+Species = Human
+Gender = Male
+Actor = Roger Lloyd-Pack

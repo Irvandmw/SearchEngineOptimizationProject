@@ -1,0 +1,3 @@
+Character Name = Mykew Gregorovitch
+Species = Human
+Gender = Male

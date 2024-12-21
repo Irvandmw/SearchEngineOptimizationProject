@@ -1,0 +1,7 @@
+Character Name = Lucius Malfoy
+Species = Human
+Gender = Male
+House = Slytherin
+Wand (Wood) = Elm
+Wand (Core) = Dragon Heartstring
+Actor = Jason Isaacs

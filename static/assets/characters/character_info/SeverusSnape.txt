@@ -1,0 +1,6 @@
+Character Name = Severus Snape
+Species = Human
+Gender = Male
+House = Slytherin
+Patronus = Doe
+Actor = Alan Rickman

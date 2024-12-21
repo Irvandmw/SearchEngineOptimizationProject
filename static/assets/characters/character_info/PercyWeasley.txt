@@ -1,0 +1,5 @@
+Character Name = Percy Weasley
+Species = Human
+Gender = Male
+House = Gryffindor
+Actor = Chris Rankin

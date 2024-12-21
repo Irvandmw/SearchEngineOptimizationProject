@@ -1,0 +1,4 @@
+Character Name = Mrs. Cole
+Species = Human
+Gender = Male
+Actor = Judy Parfitt

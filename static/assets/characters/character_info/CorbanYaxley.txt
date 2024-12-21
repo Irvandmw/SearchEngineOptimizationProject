@@ -1,0 +1,5 @@
+Character Name = Corban Yaxley
+Species = Human
+Gender = Male
+House = Slytherin
+Actor = Peter Mullan

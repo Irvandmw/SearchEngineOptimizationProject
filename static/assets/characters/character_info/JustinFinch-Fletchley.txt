@@ -1,0 +1,4 @@
+Character Name = Justin Finch-Fletchley
+Species = Human
+Gender = Male
+House = Hufflepuff

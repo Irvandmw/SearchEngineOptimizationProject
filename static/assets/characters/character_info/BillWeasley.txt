@@ -1,0 +1,5 @@
+Character Name = Bill Weasley
+Species = Human (Werewolf traits)
+Gender = Male
+House = Gryffindor
+Actor = Domhnall Gleeson

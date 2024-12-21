@@ -1,0 +1,5 @@
+Character Name = Scabior
+Species = Human
+Gender = Male
+House = Slytherin
+Actor = Nick Moran

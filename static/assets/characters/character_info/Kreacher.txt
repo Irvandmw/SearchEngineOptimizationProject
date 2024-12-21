@@ -1,0 +1,4 @@
+Character Name = Kreacher
+Species = House Elf
+Gender = Male
+Actor = Timothy Spall

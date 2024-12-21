@@ -1,0 +1,7 @@
+Character Name = Garrick Ollivander
+Species = Human
+Gender = Male
+House = Ravenclaw
+Wand (Wood) = Hornbeam
+Wand (Core) = Dragon Heartstring
+Actor = John Hurt

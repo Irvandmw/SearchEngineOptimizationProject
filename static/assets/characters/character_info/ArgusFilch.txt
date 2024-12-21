@@ -1,0 +1,4 @@
+Character Name = Argus Filch
+Species = Human
+Gender = Male
+Actor = David Bradley

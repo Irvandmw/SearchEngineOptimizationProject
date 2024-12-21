@@ -1,0 +1,7 @@
+Character Name = Peter Pettigrew
+Species = Human
+Gender = Male
+House = Gryffindor
+Wand (Wood) = Chestnut
+Wand (Core) = Dragon Heartstring
+Actor = Timothy Spall

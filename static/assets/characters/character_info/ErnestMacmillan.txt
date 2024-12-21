@@ -1,0 +1,5 @@
+Character Name = Ernest Macmillan
+Species = Human
+Gender = Male
+House = Hufflepuff
+Patronus = Boar

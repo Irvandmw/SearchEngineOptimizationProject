@@ -1,0 +1,4 @@
+Character Name = Igor Karkaroff
+Species = Human
+Gender = Male
+Actor = Peter Bulter

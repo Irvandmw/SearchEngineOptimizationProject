@@ -1,0 +1,4 @@
+Character Name = Bloody Baron
+Species = Ghost
+Gender = Male
+House = Slytherin

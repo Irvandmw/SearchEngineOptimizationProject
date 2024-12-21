@@ -1,0 +1,4 @@
+Character Name = Marcus Belby
+Species = Human
+Gender = Male
+House = Ravenclaw

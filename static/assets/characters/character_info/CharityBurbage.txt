@@ -1,0 +1,3 @@
+Character Name = Charity Burbage
+Species = Human
+Gender = Female

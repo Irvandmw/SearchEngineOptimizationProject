@@ -1,0 +1,5 @@
+Character Name = Albus Potter
+Species = Human
+Gender = Male
+House = Slytherin
+Actor = Arthur Bowen

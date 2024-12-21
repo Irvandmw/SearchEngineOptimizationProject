@@ -1,0 +1,5 @@
+Character Name = Marcus Flint
+Species = Human
+Gender = Male
+House = Slytherin
+Actor = Jamie Campbell Bower

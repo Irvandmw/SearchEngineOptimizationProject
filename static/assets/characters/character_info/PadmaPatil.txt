@@ -1,0 +1,4 @@
+Character Name = Padma Patil
+Species = Human
+Gender = Female
+House = Ravenclaw

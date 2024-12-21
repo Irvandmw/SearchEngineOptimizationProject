@@ -1,0 +1,7 @@
+Character Name = Draco Malfoy
+Species = Human
+Gender = Male
+House = Slytherin
+Wand (Wood) = Hawthorn
+Wand (Core) = Unicorn Hair
+Actor = Tom Felton

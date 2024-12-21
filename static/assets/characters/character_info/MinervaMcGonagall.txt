@@ -1,0 +1,8 @@
+Character Name = Minerva McGonagall
+Species = Human
+Gender = Female
+House = Gryffindor
+Patronus = Cat
+Wand (Wood) = Fir
+Wand (Core) = Dragon Heartstring
+Actor = Maggie Smith

@@ -1,0 +1,4 @@
+Character Name = Alastor Moody
+Species = Human
+Gender = Male
+Actor = Brendan Gleeson (disguised by Barty Crouch Jr.)

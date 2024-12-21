@@ -1,0 +1,5 @@
+Character Name = Pomona Sprout
+Species = Human
+Gender = Female
+House = Hufflepuff
+Actor = Miriam Margolyes

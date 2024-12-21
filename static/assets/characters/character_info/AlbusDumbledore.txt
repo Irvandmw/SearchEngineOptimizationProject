@@ -1,0 +1,8 @@
+Character Name = Albus Dumbledore
+Species = Human
+Gender = Male
+House = Gryffindor
+Patronus = Phoenix
+Wand (Wood) = Elder
+Wand (Core) = Thestral Tail Hair
+Actor = Richard Harris (films 1-2), Michael Gambon (3-8)

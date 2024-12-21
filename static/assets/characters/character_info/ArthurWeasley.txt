@@ -1,0 +1,6 @@
+Character Name = Arthur Weasley
+Species = Human
+Gender = Male
+House = Gryffindor
+Patronus = Weasel
+Actor = Mark Williams

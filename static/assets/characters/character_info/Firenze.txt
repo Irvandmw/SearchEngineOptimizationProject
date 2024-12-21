@@ -1,0 +1,4 @@
+Character Name = Firenze
+Species = Centaur
+Gender = Male
+Actor = Neville Longbottom (voice)

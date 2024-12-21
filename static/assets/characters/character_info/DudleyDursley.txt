@@ -1,0 +1,4 @@
+Character Name = Dudley Dursley
+Species = Human
+Gender = Male
+Actor = Harry Melling

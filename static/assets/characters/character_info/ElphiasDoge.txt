@@ -1,0 +1,4 @@
+Character Name = Elphias Doge
+Species = Human
+Gender = Male
+Actor = David Ryall

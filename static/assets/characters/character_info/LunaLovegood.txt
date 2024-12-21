@@ -1,0 +1,6 @@
+Character Name = Luna Lovegood
+Species = Human
+Gender = Female
+House = Ravenclaw
+Patronus = Hare
+Actor = Evanna Lynch

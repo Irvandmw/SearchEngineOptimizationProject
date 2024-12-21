@@ -1,0 +1,4 @@
+Character Name = Aragog
+Species = Acromantula
+Gender = Male
+Actor = Julian Glover

@@ -1,0 +1,3 @@
+Character Name = Mrs. Granger
+Species = Human
+Gender = Female

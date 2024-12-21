@@ -1,0 +1,5 @@
+Character Name = Sirius Black
+Species = Human
+Gender = Male
+House = Gryffindor
+Actor = Gary Oldman , James Walters (young)

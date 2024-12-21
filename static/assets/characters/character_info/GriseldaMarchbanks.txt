@@ -1,0 +1,3 @@
+Character Name = Griselda Marchbanks
+Species = Human
+Gender = Female

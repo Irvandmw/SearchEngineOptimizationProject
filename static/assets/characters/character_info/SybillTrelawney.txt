@@ -1,0 +1,7 @@
+Character Name = Sybill Trelawney
+Species = Human
+Gender = Female
+House = Ravenclaw
+Wand (Wood) = Hazel
+Wand (Core) = Unicorn Hair
+Actor = Emma Thompson

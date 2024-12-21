@@ -1,0 +1,3 @@
+Character Name = Bathilda Bagshot
+Species = Human
+Gender = Female

@@ -1,0 +1,4 @@
+Character Name = Walburga Black
+Species = Human
+Gender = Female
+House = Slytherin

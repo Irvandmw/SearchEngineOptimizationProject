@@ -1,0 +1,8 @@
+Character Name = Harry Potter
+Species = Human
+Gender = Male
+House = Gryffindor
+Patronus = Stag
+Wand (Wood) = Holly
+Wand (Core) = Phoenix Feather
+Actor = Daniel Radcliffe

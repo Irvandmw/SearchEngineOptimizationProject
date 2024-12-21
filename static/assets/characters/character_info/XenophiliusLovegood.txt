@@ -1,0 +1,4 @@
+Character Name = Xenophilius Lovegood
+Species = Human
+Gender = Male
+Actor = Rhys Ifans

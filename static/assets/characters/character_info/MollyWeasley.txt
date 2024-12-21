@@ -1,0 +1,5 @@
+Character Name = Molly Weasley
+Species = Human
+Gender = Female
+House = Gryffindor
+Actor = Julie Walters

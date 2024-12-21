@@ -1,0 +1,7 @@
+Character Name = Voldemort
+Species = Human
+Gender = Male
+House = Slytherin
+Wand (Wood) = Yew
+Wand (Core) = Phoenix Feather
+Actor = Ralph Fiennes

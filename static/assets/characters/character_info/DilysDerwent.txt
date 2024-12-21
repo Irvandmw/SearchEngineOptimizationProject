@@ -1,0 +1,3 @@
+Character Name = Dilys Derwent
+Species = Human
+Gender = Female

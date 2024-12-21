@@ -1,0 +1,6 @@
+Character Name = Nymphadora Tonks
+Species = Human
+Gender = Female
+House = Hufflepuff
+Patronus = Jack rabbit
+Actor = Natalia Tena

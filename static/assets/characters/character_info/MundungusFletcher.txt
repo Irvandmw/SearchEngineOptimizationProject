@@ -1,0 +1,4 @@
+Character Name = Mundungus Fletcher
+Species = Human
+Gender = Male
+Actor = Andy Linden

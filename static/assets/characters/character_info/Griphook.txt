@@ -1,0 +1,4 @@
+Character Name = Griphook
+Species = Goblin
+Gender = Male
+Actor = Warwick Davis

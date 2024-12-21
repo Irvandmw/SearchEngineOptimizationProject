@@ -1,0 +1,5 @@
+Character Name = Moaning Myrtle
+Species = Ghost
+Gender = Female
+House = Ravenclaw
+Actor = Shirley Henderson

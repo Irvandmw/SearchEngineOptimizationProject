@@ -1,0 +1,4 @@
+Character Name = Muriel
+Species = Human
+Gender = Female
+Actor = Matyelok Gibbs

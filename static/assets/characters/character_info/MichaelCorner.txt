@@ -1,0 +1,5 @@
+Character Name = Michael Corner
+Species = Human
+Gender = Male
+House = Ravenclaw
+Patronus = Squirrel

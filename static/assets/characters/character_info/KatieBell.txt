@@ -1,0 +1,4 @@
+Character Name = Katie Bell
+Species = Human
+Gender = Female
+House = Gryffindor

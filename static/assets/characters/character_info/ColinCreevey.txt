@@ -1,0 +1,4 @@
+Character Name = Colin Creevey
+Species = Human
+Gender = Male
+House = Gryffindor

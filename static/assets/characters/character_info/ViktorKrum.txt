@@ -1,0 +1,4 @@
+Character Name = Viktor Krum
+Species = Human
+Gender = Male
+House = Durmstrang Institute

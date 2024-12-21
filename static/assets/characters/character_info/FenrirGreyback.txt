@@ -1,0 +1,3 @@
+Character Name = Fenrir Greyback
+Species = Werewolf
+Gender = Male

@@ -1,0 +1,5 @@
+Character Name = Parvati Patil
+Species = Human
+Gender = Female
+House = Gryffindor
+Actor = Shefali Chowdhury

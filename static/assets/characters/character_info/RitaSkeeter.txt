@@ -1,0 +1,4 @@
+Character Name = Rita Skeeter
+Species = Human
+Gender = Female
+Actor = Miranda Richardson

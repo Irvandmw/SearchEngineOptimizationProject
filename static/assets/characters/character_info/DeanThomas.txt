@@ -1,0 +1,5 @@
+Character Name = Dean Thomas
+Species = Human
+Gender = Male
+House = Gryffindor
+Actor = Alfred Enoch

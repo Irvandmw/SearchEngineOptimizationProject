@@ -1,0 +1,6 @@
+Character Name = Ginny Weasley
+Species = Human
+Gender = Female
+House = Gryffindor
+Patronus = Horse
+Actor = Bonnie Wright

@@ -1,0 +1,5 @@
+Character Name = Narcissa Malfoy
+Species = Human
+Gender = Female
+House = Slytherin
+Actor = Helen McCrory

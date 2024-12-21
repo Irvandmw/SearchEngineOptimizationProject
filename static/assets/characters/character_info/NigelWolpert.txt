@@ -1,0 +1,4 @@
+Character Name = Nigel Wolpert
+Species = Human
+Gender = Male
+House = Gryffindor

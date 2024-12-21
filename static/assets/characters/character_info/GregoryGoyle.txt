@@ -1,0 +1,4 @@
+Character Name = Gregory Goyle
+Species = Human
+Gender = Male
+House = Slytherin

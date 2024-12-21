@@ -136,14 +136,15 @@
         margin-top: -105px;
       }
 
-      .results-container {
+      .results-container,
+      .result_char {
         display: flex;
         justify-content: space-around;
         width: 80%;
         margin-top: 20px;
         margin-bottom: 80px;
       }
-
+      
       .did-you-mean {
         text-align: center;
         color: white;
@@ -195,7 +196,11 @@
         padding: 10px;
       }
 
-      .character-display {
+      .result_char{
+        align-items: flex-start;
+      }
+
+     .character-display {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -220,7 +225,7 @@
         transform: scale(1.1);
       }
 
-      .character-name {
+      .character-label {
         font-size: 20px;
         color: #333333;
         text-align: center;
@@ -229,6 +234,20 @@
         padding: 5px 10px;
         margin-top: -0px;
       }
+
+      .character-info {
+        display: none;
+        padding: 20px;
+        background-color: #f9f9f9; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        width: 300px; 
+      }
+
+      .info-text {
+
+      }
+
     </style>
   </head>
   <body>
@@ -257,16 +276,63 @@
       </h2>
     {% endif %}
 
+    <div class="result_char">
     {% if character %}
     <div class="character_display">
       <img
         src="/static/assets/characters/{{ character.image }}"
         alt="Character Image"
         class="character-image"
+        id="character-image"
+        onclick="loadCharacterDetails('{{ character.info }}')"
       />
-      <p class="character-name"><b>{{ character.name }}</b></p>
+      <p class="character-label"><b>{{ character.name }}</b></p>
     </div>
-    {% endif %}
+
+  
+    <div id="character-info" class="character-info" style="display: none;">
+      <h3 class="character-label">Character Information</h3>
+      <p class="info-text" id="info-text"></p>
+    </div>
+  
+    <script>
+      async function loadCharacterDetails(infoPath) {
+        try {
+          const response = await fetch(`/static/assets/characters/${infoPath}`);
+          
+          if (!response.ok) {
+            throw new Error("Failed to load character details.");
+          }
+      
+          const characterDetails = await response.text();
+          
+          // buat nampilin data .txt dalam bentuk list
+          const detailsArray = characterDetails.split('\n'); 
+          const infoTextElement = document.getElementById('info-text');
+          
+          // buat list
+          let listHTML = '<ul>';
+          detailsArray.forEach(line => {
+            // split tiap baris jadi key = value
+            const [key, value] = line.split(' = ');
+            if (key && value) {
+              listHTML += `<li><strong>${key.trim()}:</strong> ${value.trim()}</li>`;
+            }
+          });
+          listHTML += '</ul>'; 
+          infoTextElement.innerHTML = listHTML;
+      
+          document.getElementById('character-info').style.display = 'block';
+        } catch (error) {
+          console.error("Error fetching character details:", error);
+          alert("Could not load character details. Please try again later.");
+        }
+      }
+      
+    </script>
+  {% endif %}
+  </div>
+
 
 <div class="results-container">
   {% if ranked_books_tf %}

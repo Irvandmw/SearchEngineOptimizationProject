@@ -1,0 +1,5 @@
+Character Name = Lee Jordan
+Species = Human
+Gender = Male
+House = Gryffindor
+Actor = Luke Youngblood

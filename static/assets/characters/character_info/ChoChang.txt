@@ -1,0 +1,6 @@
+Character Name = Cho Chang
+Species = Human
+Gender = Female
+House = Ravenclaw
+Patronus = Swan
+Actor = Katie Leung

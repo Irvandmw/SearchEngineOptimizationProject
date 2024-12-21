@@ -1,0 +1,6 @@
+Character Name = Rubeus Hagrid
+Species = Half-Human/Half-Giant
+Gender = Male
+House = Gryffindor
+Wand (Wood) = Oak
+Actor = Robbie Coltrane

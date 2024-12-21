@@ -1,0 +1,3 @@
+Character Name = Perkins
+Species = Human
+Gender = Male

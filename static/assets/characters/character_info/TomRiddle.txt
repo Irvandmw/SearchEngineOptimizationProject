@@ -1,0 +1,7 @@
+Character Name = Tom Riddle
+Species = Human
+Gender = Male
+House = Slytherin
+Wand (Wood) = Yew
+Wand (Core) = Phoenix Feather
+Actor = Christian Coulson

@@ -1,0 +1,8 @@
+Character Name = Remus Lupin
+Species = Werewolf
+Gender = Male
+House = Gryffindor
+Patronus = Wolf
+Wand (Wood) = Cypress
+Wand (Core) = Unicorn Hair
+Actor = David Thewlis

@@ -1,0 +1,4 @@
+Character Name = Zacharias Smith
+Species = Human
+Gender = Male
+House = Hufflepuff

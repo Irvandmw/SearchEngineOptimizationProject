@@ -1,0 +1,4 @@
+Character Name = Rosmerta
+Species = Human
+Gender = Female
+Actor = Frances de la Tour

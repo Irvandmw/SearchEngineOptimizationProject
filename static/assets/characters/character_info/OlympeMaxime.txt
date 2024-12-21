@@ -1,0 +1,5 @@
+Character Name = Olympe Maxime
+Species = Half-Human/Half-Giant
+Gender = Female
+House = Beauxbatons Academy of Magic
+Actor = Frances de la Tour

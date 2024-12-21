@@ -1,0 +1,5 @@
+Character Name = Lavender Brown
+Species = Human
+Gender = Female
+House = Gryffindor
+Actor = Jessie Cave

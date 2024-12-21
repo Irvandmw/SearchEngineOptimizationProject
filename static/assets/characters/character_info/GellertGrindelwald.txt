@@ -1,0 +1,4 @@
+Character Name = Gellert Grindelwald
+Species = Human
+Gender = Male
+House = Durmstrang Institute

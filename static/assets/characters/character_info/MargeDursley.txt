@@ -1,0 +1,4 @@
+Character Name = Marge Dursley
+Species = Human
+Gender = Female
+Actor = Pam Ferris

@@ -1,0 +1,5 @@
+Character Name = Susan Bones
+Species = Human
+Gender = Female
+House = Hufflepuff
+Actor = Eleanor Columbus

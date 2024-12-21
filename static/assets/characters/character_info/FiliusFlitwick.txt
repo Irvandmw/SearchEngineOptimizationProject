@@ -1,0 +1,5 @@
+Character Name = Filius Flitwick
+Species = Human (Part-Goblin)
+Gender = Male
+House = Ravenclaw
+Actor = Warwick Davis

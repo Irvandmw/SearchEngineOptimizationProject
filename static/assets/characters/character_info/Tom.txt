@@ -1,0 +1,3 @@
+Character Name = Tom
+Species = Human
+Gender = Male

@@ -1,0 +1,7 @@
+Character Name = Lily Potter
+Species = Human
+Gender = Female
+House = Gryffindor
+Patronus = Doe
+Wand (Wood) = Willow
+Actor = Geraldine Somerville

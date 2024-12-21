@@ -1,0 +1,3 @@
+Character Name = Mr. Granger
+Species = Human
+Gender = Male

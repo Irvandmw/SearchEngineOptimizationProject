@@ -1,0 +1,4 @@
+Character Name = Vernon Dursley
+Species = Human
+Gender = Male
+Actor = Richard Griffiths

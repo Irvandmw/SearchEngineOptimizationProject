@@ -1,0 +1,4 @@
+Character Name = Blaise Zabini
+Species = Human
+Gender = Male
+House = Slytherin

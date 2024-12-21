@@ -1,0 +1,4 @@
+Character Name = Bogrod
+Species = Goblin
+Gender = Male
+Actor = Dave Legeno

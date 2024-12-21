@@ -1,0 +1,4 @@
+Character Name = Poppy Pomfrey
+Species = Human
+Gender = Female
+Actor = Gemma Jones

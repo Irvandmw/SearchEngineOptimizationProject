@@ -1,0 +1,5 @@
+Character Name = Fleur Delacour
+Species = Human (Quarter-Veela)
+Gender = Female
+House = Beauxbatons Academy of Magic
+Actor = Clémence Poésy

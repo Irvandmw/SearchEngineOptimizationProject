@@ -1,0 +1,3 @@
+Character Name = Phineas
+Species = Human
+Gender = Male
