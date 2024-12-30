@@ -294,43 +294,7 @@
       <h3 class="character-label">Character Information</h3>
       <p class="info-text" id="info-text"></p>
     </div>
-  
-    <script>
-      async function loadCharacterDetails(infoPath) {
-        try {
-          const response = await fetch(`/static/assets/characters/${infoPath}`);
-          
-          if (!response.ok) {
-            throw new Error("Failed to load character details.");
-          }
-      
-          const characterDetails = await response.text();
-          
-          // buat nampilin data .txt dalam bentuk list
-          const detailsArray = characterDetails.split('\n'); 
-          const infoTextElement = document.getElementById('info-text');
-          
-          // buat list
-          let listHTML = '<ul>';
-          detailsArray.forEach(line => {
-            // split tiap baris jadi key = value
-            const [key, value] = line.split(' = ');
-            if (key && value) {
-              listHTML += `<li><strong>${key.trim()}:</strong> ${value.trim()}</li>`;
-            }
-          });
-          listHTML += '</ul>'; 
-          infoTextElement.innerHTML = listHTML;
-      
-          document.getElementById('character-info').style.display = 'block';
-        } catch (error) {
-          console.error("Error fetching character details:", error);
-          alert("Could not load character details. Please try again later.");
-        }
-      }
-      
-    </script>
-  {% endif %}
+    {% endif %}
   </div>
 
 
@@ -389,5 +353,38 @@
         const resubmitForm = document.getElementById("resubmit-form");
         resubmitForm.submit();
     }
+
+    async function loadCharacterDetails(infoPath) {
+        try {
+          const response = await fetch(`/static/assets/characters/${infoPath}`);
+          
+          if (!response.ok) {
+            throw new Error("Failed to load character details.");
+          }
+      
+          const characterDetails = await response.text();
+          
+          // buat nampilin data .txt dalam bentuk list
+          const detailsArray = characterDetails.split('\n'); 
+          const infoTextElement = document.getElementById('info-text');
+          
+          // buat list
+          let listHTML = '<ul>';
+          detailsArray.forEach(line => {
+            // split tiap baris jadi key = value
+            const [key, value] = line.split(' = ');
+            if (key && value) {
+              listHTML += `<li><strong>${key.trim()}:</strong> ${value.trim()}</li>`;
+            }
+          });
+          listHTML += '</ul>'; 
+          infoTextElement.innerHTML = listHTML;
+      
+          document.getElementById('character-info').style.display = 'block';
+        } catch (error) {
+          console.error("Error fetching character details:", error);
+          alert("Could not load character details. Please try again later.");
+        }
+      }
 </script>
 </html>

@@ -1,4 +1,3 @@
-import Levenshtein
 import os
 import re
 import webbrowser
@@ -91,44 +90,6 @@ characters_levenshtein = {
     "Peter Pettigrew", "Gilderoy Lockhart"
 }
 
-def correct_search_term(search_term, characters_levenshtein, threshold=0.1):
-    closest_match = search_term
-    min_distance = float('inf')
-    
-    search_term = search_term.lower()
-
-    for character in characters_levenshtein:
-        character_lower = character.lower()
-        if search_term == character_lower:
-            print(f"Exact match found: {character_lower}")  
-            return character  
-
-    for character in characters_levenshtein:
-        character_lower = character.lower()
-        if search_term in character_lower:
-            print(f"Partial match found: {character_lower}")  
-            return character 
-
-    for character in characters_levenshtein:
-        character_lower = character.lower()
-        dist = Levenshtein.distance(search_term, character_lower)
-        print(f"Comparing '{search_term}' to '{character_lower}', distance: {dist}") 
-
-        if dist < min_distance:
-            min_distance = dist
-            closest_match = character
-            print(f"New closest match: {closest_match}, distance: {min_distance}")  
-    
-    threshold_value = threshold * len(search_term)
-    print(f"Threshold value: {threshold_value}, Minimum distance: {min_distance}")  
-    
-    if min_distance <= threshold_value:
-        print(f"Returning closest match: {closest_match} (distance: {min_distance})")  
-        return closest_match
-    else:
-        print(f"No match found within threshold. Returning None.") 
-
-# new search books
 def search_books(books, search_term):
     processed_search_term = remove_stop_words(search_term.lower())
     search_words = processed_search_term.split()
@@ -147,8 +108,6 @@ def search_books(books, search_term):
 
 # FLASK
 # http://127.0.0.1:5000/
-# @app.route('/', methods=['GET', 'POST'])
-# def index():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
