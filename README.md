@@ -17,7 +17,7 @@ This project demonstrates core *Information Retrieval (IR)* concepts, *Text Prep
 # 🛠️ TECHNOLOGIES
 - Python 3
 - Flask
-- HTML / Jinja2 templates
+- HTML
 - [python-Levenshtein](https://pypi.org/project/python-Levenshtein/) (used in `SearchEngine.py`)
 
 ---
