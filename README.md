@@ -106,8 +106,8 @@ However, if you do use this project in any way,
 
 🔗 Contact: 
 - [Irvan](https://github.com/Irvandmw)
-- [Rafael Joy Hadi](https://github.com/rafaeljoyhadi)
 - [Carollyn Thio](https://github.com/ollynth)
+- [Rafael Joy Hadi](https://github.com/rafaeljoyhadi)
 
 Giving credit helps acknowledge the effort behind this work and supports open collaboration.  
 Thank you for respecting the creator’s contribution! 🌱
